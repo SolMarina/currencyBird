@@ -1,0 +1,30 @@
+.invitation {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: whitesmoke;
+  box-shadow: 0px 10px 10px grey;
+  border-radius: 10px;
+}
+.inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  justify-items: center;
+  margin: 30px;
+  color: black;
+}
+
+form {
+  padding-bottom: 50px;
+}
+
+#submit {
+  background-color: green;
+  color: white;
+  width: 20%;
+}
+
+input {
+  padding: 5px;
+}
