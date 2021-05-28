@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import "./invitationView.css";
-export default function InvitationView(props) {
-  const [datos, setDatos] = useState({
-    email: "",
-    name: "",
-  });
-  const handleInputChange = (event) => {
-    setDatos({
-      ...datos,
-      [event.target.name]: event.target.value,
-    });
+
+export default function InvitationView({ updateComponent,   updateList }) {
+  const [show, setShow] = useState(true);
+  const [data, setData] = useState("");
+  
+  const handleInputChange = (e) => {
+    setData(e.target.value);
   };
-  const enviarDatos = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (data) {
+     updateList(data);
+      setData("");
+    }
   };
 
   let ramdomLink = Math.random().toString(36).substring(7);
 
   return (
     <div className="invitation">
-      <form onSubmit={enviarDatos}>
+      <form onSubmit={handleSubmit}>
         <div className="inputs">
           <div className="inputEmail">
             <input
-              onChange={handleInputChange}
               type="email"
               id="email"
               name="email"
@@ -36,19 +37,32 @@ export default function InvitationView(props) {
               type="text"
               id="name"
               name="name"
+              value={data}
               placeholder="Nombre completo"
             ></input>
           </div>
         </div>
-        <hr />
-        <input id="submit" type="submit" value="COMPARTIR"></input>
+        <input
+          id="submit"
+          type="submit"
+          value="COMPARTIR"
+          onClick={() => {
+            setShow(!show);
+          }}
+          {...(show ? "Div 2" : "Div 1")}
+        ></input>
+        <p>{data}</p>
         <br></br>
         <br></br>
-        <p>{datos.email}</p>
-        <p>{datos.name}</p>
-        <a onClick={() => props.updateComponent("form")}>
-          https://currencybird.cl/register/invite/{ramdomLink}
-        </a>
+        {show ? (
+          <a className="link" onClick={() => updateComponent("form")}>
+            https://currencybird.cl/register/invite/{ramdomLink}
+          </a>
+        ) : (
+          <a className="link1" onClick={() => updateComponent("form")}>
+            https://currencybird.cl/register/invite/{ramdomLink}
+          </a>
+        )}
       </form>
     </div>
   );
