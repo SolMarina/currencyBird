@@ -12,10 +12,11 @@ form {
   padding: 20px;
 }
 
-#submit {
+#button {
   background-color: green;
   color: white;
   width: 28%;
+  height: 30%;
 }
 
 select {

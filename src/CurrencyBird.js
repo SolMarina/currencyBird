@@ -6,21 +6,34 @@ import ManagementView from "./views/managementView/ManagementView";
 
 export default function CurrencyBirdApp() {
   const [showComponent, setShowComponent] = useState("invitation");
+  const [list, setList] = useState("");
 
-  const updateComponent = (name) => {
-    setShowComponent(name);
+console.log(list)
+
+  const updateState = (d) => {
+    setList(list => [...list, d]);
+  };
+  
+
+  const updateComponent = (item) => {
+    setShowComponent(item);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         {showComponent === "invitation" ? (
-          <InvitationView updateComponent={updateComponent} />
+          <InvitationView updateComponent={updateComponent} updateList={updateState}  />
         ) : showComponent === "form" ? (
-          <RegistrationForm updateComponent={updateComponent} />
+          <RegistrationForm updateComponent={updateComponent} updateList={updateState}  />
         ) : (
-          <ManagementView updateComponent={updateComponent} />
+          <ManagementView list={list}
+          
+         
+          
+          /> 
         )}
+        
       </header>
     </div>
   );

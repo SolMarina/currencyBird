@@ -1,66 +1,73 @@
 import React, { useState } from "react";
 import "./RegistrationForm.css";
-export default function RegistrationForm(props) {
-  const [data, setData] = useState({
-    email: "",
-    name: "",
-  });
-  const handleInputChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
+
+export default function RegistrationForm({ updateComponent,   updateList }) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    if (inputValue) {
+     updateList(inputValue);
+      setInputValue("");
+    }
   };
-  const sendData = (event) => {
-    event.preventDefault();
-  };
+ 
+const handleInputChange = (e) => {
+  console.log("holaaaaaa")
+    setInputValue(e.target.value);
+    updateList(e.target.value);
+  
+}
+
+
+ 
 
   return (
     <div className="registrationForm">
-      <form onSubmit={sendData}>
+      <form onSubmit={handleSubmit}>
         <h3>Formulario de Registro</h3>
-        <div>
+
           <input
-            onChange={handleInputChange}
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Nombre completo"
+          onChange={handleInputChange}
+          type="text"
+          id="name"
+          name="name"
+          value={inputValue}
+          placeholder="Nombre completo"
           ></input>
-        </div>
-        <div>
+
+      
           <input
-            onChange={handleInputChange}
             type="email"
             id="email"
             name="email"
             placeholder="Ingresa tu email"
           ></input>
-        </div>
-        <div>
+
+
           <input
             type="text"
             id="direction"
             name="direction"
             placeholder="Dirección"
           ></input>
-        </div>
-        <div>
+
+ 
           <select name="sex" required>
             <option value="">Sexo</option>
             <option>Femenino</option>
             <option>Maculino</option>
             <option>Otro</option>
           </select>
-        </div>
+  
         <input
           id="submit"
           type="submit"
           value="REGISTRARSE"
-          onClick={props.updateComponent}
+          onClick={() => updateComponent()}
         ></input>
-        <p>{data.email}</p>
-        <p>{data.name}</p>
       </form>
     </div>
   );
